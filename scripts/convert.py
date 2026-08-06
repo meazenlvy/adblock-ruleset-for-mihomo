@@ -1,37 +1,76 @@
+import ipaddress
 from pathlib import Path
 
 INPUT = Path("../sources/adguard.txt")
-OUTPUT = Path("../output/ads.yaml")
+OUTPUT = Path("../output/ruleset.yaml")
 
-def parse_adguard_rule(line):
-    line = line.strip()
-    if not line or line.startswith("!"):
+def parse_ip(value):
+    try:
+        network = ipaddress.ip_network(value, strict=False)
+        if network.version == 4:
+            return "IP-CIDR", str(network)
+        else:
+            return "IP-CIDR6", str(network)
+    except ValueError:
         return None
-    if line.startswith("@@"):
+
+def parser(line):
+    value = line.strip()
+    if not value:
         return None
-    if not line.startswith("||"):
+    if value.startswith(("0.0.0.0", "127.0.0.1", "::1", "::")):
+        parts = value.split()
+        if len(parts) < 2:
+            return None
+        value = parts[1].lower()
+        ip_value = parse_ip(value)
+        if ip_value:
+            return ip_value
+        if "." not in value:
+            return None
+        return "DOMAIN", value
+
+    if (
+        value.startswith("!")
+        or value.startswith("#")
+        or value.startswith("@@")
+        or not value.startswith("||")
+    ):
         return None
-    domain = line[2:]
-    domain = domain.split("^")[0]
-    domain = domain.split("/")[0]
-    if "." not in domain:
+    if "$" in value:
+        if "$important" in value:
+            value = value.split("$", 1)[0]
+        else:
+            return None
+    value = value[2:]
+    if "^" in value:
+        value = value.split("^", 1)[0]
+    ip_value = parse_ip(value)
+    if ip_value:
+        return ip_value
+    if "/" in value:
+        value = value.split("/", 1)[0]
+    if "." not in value:
         return None
-    if "*" in domain:
-        return None
-    return domain.lower()
+    value = value.lower()
+    if "*" in value:
+        return "DOMAIN-WILDCARD", value
+    return "DOMAIN-SUFFIX", value
 
 def main():
-    domains = set()
+    rules = set()
     with INPUT.open(
         encoding="utf-8"
     ) as f:
         for line in f:
-            domain = parse_adguard_rule(line)
-            if domain:
-                domains.add(domain)
+            result = parser(line)
+            if not result:
+                continue
+            rules.add(result)
     print(
-        f"Found {len(domains)} domains"
+        f"Found {len(rules)} rules"
     )
+
     OUTPUT.parent.mkdir(
         exist_ok=True
     )
@@ -40,9 +79,9 @@ def main():
         encoding="utf-8"
     ) as f:
         f.write("payload:\n")
-        for domain in sorted(domains):
+        for kind, value in sorted(rules):
             f.write(
-                f"  - DOMAIN-SUFFIX,{domain}\n"
+                f"  - {kind},{value}\n"
             )
 
 if __name__ == "__main__":
