@@ -14,12 +14,13 @@ def build_mrs():
     )
 
     command = [
-        str(MIHOMO),
-        "convert-ruleset",
-        "classical",
-        str(INPUT),
-        str(OUTPUT),
-    ]
+                    str(MIHOMO),
+                    "convert-ruleset",
+                    "classical",
+                    "yaml",
+                    str(INPUT),
+                    str(OUTPUT),
+                ]
 
     result = subprocess.run(
         command,
