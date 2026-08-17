@@ -3,7 +3,7 @@ import yaml
 
 
 INPUT_DIR = Path("../temp")
-OUTPUT = Path("../rules/merged.yaml")
+OUTPUT = Path("../rules/adguard-dns.yaml")
 
 
 def load_rules(path):
