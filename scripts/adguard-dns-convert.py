@@ -1,59 +1,51 @@
-import ipaddress
 from pathlib import Path
 
-INPUT = Path("../sources/adguard.txt")
-OUTPUT = Path("../output/ruleset.yaml")
-
-def parse_ip(value):
-    try:
-        network = ipaddress.ip_network(value, strict=False)
-        if network.version == 4:
-            return "IP-CIDR", str(network)
-        else:
-            return "IP-CIDR6", str(network)
-    except ValueError:
-        return None
+INPUT = Path("../sources/adguard-dns.txt")
+OUTPUT = Path("../output/adguard-dns.yaml")
 
 def parser(line):
+    unsupported= ("badfilter","denyallow",)
     value = line.strip()
     if not value:
         return None
-    if value.startswith(("0.0.0.0", "127.0.0.1", "::1", "::")):
-        parts = value.split()
-        if len(parts) < 2:
-            return None
-        value = parts[1].lower()
-        ip_value = parse_ip(value)
-        if ip_value:
-            return ip_value
-        if "." not in value:
-            return None
-        return "DOMAIN", value
 
     if (
         value.startswith("!")
         or value.startswith("#")
         or value.startswith("@@")
-        or not value.startswith("||")
     ):
         return None
     if "$" in value:
-        if "$important" in value:
-            value = value.split("$", 1)[0]
-        else:
+        modifiers = [
+            modifier.split("=", 1)[0]
+            for modifier in value.split("$", 1)[1].split(",")
+        ]
+
+        if any(
+            modifier in modifiers
+            for modifier in unsupported
+        ):
             return None
-    value = value[2:]
-    if "^" in value:
-        value = value.split("^", 1)[0]
-    ip_value = parse_ip(value)
-    if ip_value:
-        return ip_value
-    if "/" in value:
-        value = value.split("/", 1)[0]
+    value = value.split("$", 1)[0]
+    if value.startswith("/") and value.endswith("/"):
+        value = value[1: -1]
+        return "DOMAIN-REGEX", value
     if "." not in value:
         return None
     value = value.lower()
-    if "*" in value:
+    if "^" in value:
+        value = value.split("^", 1)[0]
+    if "/" in value:
+        value = value.split("/", 1)[0]
+    if value.startswith("||"):
+        value = value[2:]
+    elif value.startswith("|"):
+        if value.endswith("|"):
+            value = value[1: -1]
+            return "DOMAIN", value
+        value = value[1:]
+        return "DOMAIN", value
+    if  value.startswith("*"):
         return "DOMAIN-WILDCARD", value
     return "DOMAIN-SUFFIX", value
 
