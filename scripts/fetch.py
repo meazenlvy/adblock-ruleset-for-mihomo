@@ -15,10 +15,14 @@ SOURCES = {
         "https://raw.githubusercontent.com/2Gardon/SM-Ad-FuckU-hosts/refs/heads/master/SMAdHosts",
 
     "awavenue.yaml":
-        "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash-Classical.yaml"
+        "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash-Classical.yaml",
+
+    "awavenue.mrs":
+        "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.mrs"
 }
 
 TXT_OUTPUT_DIR = Path("./sources")
+MRS_OUTPUT_DIR = Path("./sources")
 YAML_OUTPUT_DIR = Path("./temp")
 
 
@@ -60,6 +64,8 @@ def main():
             OUTPUT_DIR = TXT_OUTPUT_DIR
         elif filename.endswith(".yaml"):
             OUTPUT_DIR = YAML_OUTPUT_DIR
+        elif filename.endswith(".mrs"):
+            OUTPUT_DIR = MRS_OUTPUT_DIR
         else:
             print(f"Unsupported type: {filename}")
             continue

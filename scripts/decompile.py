@@ -20,7 +20,7 @@ def decompile_mrs(mrs_file):
         [
             str(MIHOMO),
             "convert-ruleset",
-            "classical",
+            "domain",
             "mrs",
             str(mrs_file),
             str(txt_file),
