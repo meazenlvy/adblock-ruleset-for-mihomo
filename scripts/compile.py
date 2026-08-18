@@ -2,8 +2,8 @@ from pathlib import Path
 import subprocess
 
 
-INPUT = Path("./rules/adguard-dns.yaml")
-OUTPUT = Path("./rules/adguard-dns.mrs")
+INPUT = Path("./rules/adblock.yaml")
+OUTPUT = Path("./rules/adblock.mrs")
 
 MIHOMO = Path("./bin/mihomo")
 

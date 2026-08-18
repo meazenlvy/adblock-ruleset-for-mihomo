@@ -3,7 +3,7 @@ import yaml
 
 
 INPUT_DIR = Path("./temp")
-OUTPUT = Path("./rules/adguard-dns.yaml")
+OUTPUT = Path("./rules/adblock.yaml")
 
 
 def load_rules(path):
