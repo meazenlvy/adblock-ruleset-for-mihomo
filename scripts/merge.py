@@ -44,16 +44,9 @@ def main():
         "w",
         encoding="utf-8"
     ) as f:
-
-        yaml.dump(
-            {
-                "payload": sorted(rules)
-            },
-            f,
-            allow_unicode=True,
-            sort_keys=False,
-            Dumper=IndentDumper
-        )
+            f.write("payload:\n")
+            for rule in sorted(rules):
+                f.write(f"  - {rule}\n")
 
 
 if __name__ == "__main__":
