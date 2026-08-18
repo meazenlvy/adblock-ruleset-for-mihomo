@@ -75,7 +75,11 @@ jobs:
 
 
           mkdir -p rules
+          mkdir -p sources
+          mkdir -p temp
           git add rules/
+          git add sources/
+          git add temp/
 
 
           git diff --cached --quiet || \
