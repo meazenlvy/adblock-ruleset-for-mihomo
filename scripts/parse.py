@@ -99,6 +99,8 @@ def parse_adblock_rules(line):
     if value.startswith("||"):
         value = value[2:]
         if  value.startswith("*."):
+            if "*" in value[2:]:
+                return None
             return "DOMAIN-WILDCARD", value
         return "DOMAIN-SUFFIX", value
     if value.startswith("|"):
@@ -108,6 +110,8 @@ def parse_adblock_rules(line):
         value = value[1:]
         return "DOMAIN", value
     if  value.startswith("*."):
+        if "*" in value[2:]:
+            return None
         return "DOMAIN-WILDCARD", value
     return "DOMAIN", value
 
