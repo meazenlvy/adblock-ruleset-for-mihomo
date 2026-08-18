@@ -121,7 +121,13 @@ def parse_hosts_rules(line):
 def parse_domain_rules(line):
 
     value = line.lower()
-    return "DOMAIN-SUFFIX", value
+    if line.startswith("+"):
+        if line.startswith("+."):
+            value = line.[2:]
+            return "DOMAIN-SUFFIX", value
+        value = line[1:]
+        return "DOMAIN-SUFFIX", value
+    return "DOMAIN", value
 
 def main():
 
