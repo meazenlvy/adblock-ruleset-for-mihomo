@@ -2,11 +2,14 @@ from pathlib import Path
 import yaml
 
 
+# Define variables.
 INPUT_DIR = Path("./temp")
 OUTPUT = Path("./rules/adblock.yaml")
 
 
+# Define load function.
 def load_rules(path):
+
     with path.open(
         encoding="utf-8"
     ) as f:
@@ -19,6 +22,7 @@ def load_rules(path):
 
 
 def main():
+
     rules = set()
 
     for file in INPUT_DIR.glob("*.yaml"):
@@ -28,12 +32,9 @@ def main():
 
         for rule in load_rules(file):
             rules.add(rule)
-
-
     print(
         f"Total rules: {len(rules)}"
     )
-
 
     OUTPUT.parent.mkdir(
         exist_ok=True

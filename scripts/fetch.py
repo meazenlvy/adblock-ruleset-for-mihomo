@@ -1,6 +1,9 @@
 from pathlib import Path
 from urllib.request import urlopen, Request
 
+
+# Define variables.
+# Source rules.
 SOURCES = {
     "qy.txt": 
         "https://raw.githubusercontent.com/790953214/qy-Ads-Rule/main/black.txt",
@@ -18,7 +21,9 @@ SOURCES = {
 OUTPUT_DIR = Path("./sources")
 
 
-def download(url, path):
+# Define download function.
+def download_rules(url, path):
+
     print(f"Downloading: {url}")
 
     request = Request(
@@ -28,7 +33,7 @@ def download(url, path):
         }
     )
 
-    with urlopen(request, timeout=30) as response:
+    with urlopen(request, timeout=10) as response:
         content = response.read()
 
     path.write_bytes(content)
@@ -37,17 +42,18 @@ def download(url, path):
         f"Saved: {path} ({len(content)} bytes)"
     )
 
-
 def main():
+
     OUTPUT_DIR.mkdir(
         exist_ok=True
     )
 
     success = 0
 
+# Download rules.
     for filename, url in SOURCES.items():
         try:
-            download(
+            download_rules(
                 url,
                 OUTPUT_DIR / filename
             )
