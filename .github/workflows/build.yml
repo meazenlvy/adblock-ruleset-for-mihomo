@@ -54,6 +54,12 @@ jobs:
           python scripts/decompile.py
 
 
+      - name: Check output
+        run: |
+          file temp/*.yaml
+          head -20 temp/*.yaml
+
+
       - name: Parse rules
         run: |
           python scripts/parse.py
