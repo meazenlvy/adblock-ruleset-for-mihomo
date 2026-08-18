@@ -121,9 +121,9 @@ def parse_hosts_rules(line):
 def parse_domain_rules(line):
 
     value = line.lower()
-    if line.startswith("+"):
-        if line.startswith("+."):
-            value = line.[2:]
+    if value.startswith("+"):
+        if value.startswith("+."):
+            value = line[2:]
             return "DOMAIN-SUFFIX", value
         value = line[1:]
         return "DOMAIN-SUFFIX", value
@@ -149,9 +149,9 @@ def main():
 # Parse accirding to types.
                 if rule_type == "ADBLOCK":
                     value = parse_adblock_rules(value)
-                if rule_type == "HOSTS":
+                elif rule_type == "HOSTS":
                     value = parse_hosts_rules(value)
-                if rule_type == "DOMAIN":
+                elif rule_type == "DOMAIN":
                     value = parse_domain_rules(value)
                 if not value:
                     continue
