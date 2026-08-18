@@ -13,12 +13,45 @@ def load_rules(path):
     with path.open(
         encoding="utf-8"
     ) as f:
-        data = yaml.safe_load(f)or {}
+        data = yaml.safe_load(f) or {}
 
-    return data.get(
-        "payload",
-        []
-    )
+# yaml
+    if isinstance(data, dict):
+        return data.get(
+            "payload",
+            []
+        )
+
+# domain-only
+    if isinstance(data, str):
+        rules = []
+        for line in data.splitlines():
+            line = line.strip()
+
+            if not line:
+                continue
+            if line.startswith("#"):
+                continue
+
+            # +xxx 转 DOMAIN-SUFFIX
+            if line.startswith("+."):
+                line = line[2:]
+                rules.append(
+                    f"DOMAIN-SUFFIX,{line}"
+                )
+            elif line.startswith("+"):
+                line = line[1:]
+                rules.append(
+                    f"DOMAIN-SUFFIX,{line}"
+                )
+            else:
+                rules.append(
+                    f"DOMAIN,{line}"
+                )
+
+        return rules
+    return []
+
 
 
 def main():
