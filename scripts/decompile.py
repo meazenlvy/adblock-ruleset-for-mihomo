@@ -20,6 +20,7 @@ def decompile_mrs(mrs_file):
         [
             str(MIHOMO),
             "convert-ruleset",
+            "domain",
             "mrs",
             "yaml",
             str(mrs_file),

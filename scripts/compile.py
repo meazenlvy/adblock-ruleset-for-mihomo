@@ -18,6 +18,7 @@ def build_mrs():
                     "convert-ruleset",
                     "domain",
                     "yaml",
+                    "mrs",
                     str(INPUT),
                     str(OUTPUT),
                 ]
