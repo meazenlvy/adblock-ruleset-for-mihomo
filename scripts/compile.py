@@ -1,9 +1,11 @@
 from pathlib import Path
 import subprocess
+import yaml
 
 
 INPUT = Path("./rules/adblock.yaml")
 OUTPUT = Path("./rules/adblock.mrs")
+TEMP = Path("./temp/adblock.yaml")
 
 MIHOMO = Path("./bin/mihomo")
 
@@ -18,9 +20,44 @@ def build_mrs():
                     "convert-ruleset",
                     "domain",
                     "yaml",
-                    str(INPUT),
+                    str(TEMP),
                     str(OUTPUT),
                 ]
+
+    rules = set()
+    with INPUT.open(
+        encoding="utf-8"
+    ) as f:
+        data = yaml.safe_load(f) or {}
+    for line in data.get("payload", []):
+        if "," not in line:
+            continue
+        rule_type, value = line.split(",", 1)
+        value = value.strip()
+        if rule_type == "DOMAIN":
+            rules.add(value)
+        elif rule_type == "DOMAIN-SUFFIX":
+            rules.add(
+                "+." + value
+            )
+        elif rule_type == "DOMAIN-WILDCARD":
+            rules.add(
+                "+" + value[1:]
+            )
+        else:
+            continue
+
+    TEMP.parent.mkdir(
+        exist_ok=True
+    )
+
+    with TEMP.open(
+        "w",
+        encoding="utf-8"
+    ) as f:
+        f.write("payload:\n")
+        for rule in sorted(rules):
+            f.write(f"  - {rule}\n")
 
     result = subprocess.run(
         command,
