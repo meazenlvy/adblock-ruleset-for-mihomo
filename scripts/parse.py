@@ -1,19 +1,60 @@
+import ipaddress
 from pathlib import Path
 
 INPUT_DIR = Path("./sources")
 OUTPUT_DIR = Path("./temp")
 
-def parser(line):
-    unsupported= ("badfilter","denyallow",)
+BLOCK_IP = {
+    "0.0.0.0",
+    "127.0.0.1",
+    "::",
+    "::1"
+  }
 
+unsupported= (
+    "badfilter",
+    "denyallow",
+    "script",
+    "image",
+    "css",
+    "third-party",
+    "popup")
+
+def judge(line):
     value = line.strip()
-    if not value:
-        return None
     if (
-        value.startswith("!")
+        not value
         or value.startswith("#")
-        or value.startswith("@@")
-    ):
+        or value.startswith("!")):
+        return None
+    parts = value.split()
+    if len(parts) < 2:
+        try:
+            ipaddress.ip_address(parts[0])
+        except ValueError:
+            if (
+                value.startswith("||")
+                or value.startswith("|")
+                or value.startswith("/")
+                or "$" in value
+                ):
+                return "ADBLOCK", value
+            return "DOMAIN", value
+        return None
+    try:
+        ipaddress.ip_address(parts[0])
+    except ValueError:
+        return None
+    if parts[0] in BLOCK_IP:
+        value = parts[1]
+        return "HOSTS", value
+    return None
+
+def parse_adblock(line):
+    value = line
+    if value.startswith("@@"):
+        return None
+    if value.startswith(("http://","https://")):
         return None
     if "$" in value:
         modifiers = [
@@ -31,7 +72,7 @@ def parser(line):
         value = value[1: -1]
         return "DOMAIN-REGEX", value
 
-    if "." not in value:
+    if not value:
         return None
     value = value.lower()
     if "^" in value:
@@ -41,15 +82,25 @@ def parser(line):
 
     if value.startswith("||"):
         value = value[2:]
-    elif value.startswith("|"):
+        if  value.startswith("*."):
+            return "DOMAIN-WILDCARD", value
+        return "DOMAIN-SUFFIX", value
+    if value.startswith("|"):
         if value.endswith("|"):
             value = value[1: -1]
             return "DOMAIN", value
         value = value[1:]
         return "DOMAIN", value
-
-    if  value.startswith("*"):
+    if  value.startswith("*."):
         return "DOMAIN-WILDCARD", value
+    return "DOMAIN", value
+
+def parse_hosts(line):
+    value = line.lower()
+    return "DOMAIN", value
+
+def parse_domain(line):
+    value = line.lower()
     return "DOMAIN-SUFFIX", value
 
 def main():
@@ -62,12 +113,21 @@ def main():
             encoding="utf-8"
         ) as f:
             for line in f:
-                result = parser(line)
+                result = judge(line)
 
                 if not result:
                     continue
 
-                rules.add(result)
+                rule_type, value = result
+                if rule_type == "ADBLOCK":
+                    value = parse_adblock(value)
+                if rule_type == "HOSTS":
+                    value = parse_hosts(value)
+                if rule_type == "DOMAIN":
+                    value = parse_domain(value)
+                if not value:
+                    continue
+                rules.add(value)
         print(
             f"Found {len(rules)} rules"
         )
