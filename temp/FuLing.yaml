@@ -1,13 +1,9 @@
 payload:
   - DOMAIN-REGEX,pangolin-sdk.*
-  - DOMAIN-SUFFIX,*-*-*-lrycfv.vip
-  - DOMAIN-SUFFIX,*ad.adbkwai.com
-  - DOMAIN-SUFFIX,*live-p2p*.bilibili*
   - DOMAIN-SUFFIX,02539717.com
   - DOMAIN-SUFFIX,08241fb.hpa163.nl
   - DOMAIN-SUFFIX,08de583.p0nkhy03m.top
   - DOMAIN-SUFFIX,0bc.twqbdfff.top
-  - DOMAIN-SUFFIX,0c4d3f6.*.com
   - DOMAIN-SUFFIX,0spw.t5124f9.vip
   - DOMAIN-SUFFIX,1.bmkjku09.cc
   - DOMAIN-SUFFIX,1.olybvun.cc
@@ -134,7 +130,6 @@ payload:
   - DOMAIN-SUFFIX,b5zzr.cc
   - DOMAIN-SUFFIX,bal113.rhdej.cn
   - DOMAIN-SUFFIX,bali351.leeuvl.cn
-  - DOMAIN-SUFFIX,bbcbbi.*.com
   - DOMAIN-SUFFIX,bbggg1119.zdqa3.com
   - DOMAIN-SUFFIX,bchbf.qlwmt.cn
   - DOMAIN-SUFFIX,bd666.ahtdqlz.cn
@@ -166,8 +161,6 @@ payload:
   - DOMAIN-SUFFIX,ctyfmc.icu
   - DOMAIN-SUFFIX,d3.sz7yo.com
   - DOMAIN-SUFFIX,da5.adfsda005.xyz
-  - DOMAIN-SUFFIX,dciclc.*.top
-  - DOMAIN-SUFFIX,dcivlv.*.top
   - DOMAIN-SUFFIX,df101.drbdlx.cn
   - DOMAIN-SUFFIX,df101.fyshvb.cn
   - DOMAIN-SUFFIX,df101.gqtbt.cn
@@ -199,7 +192,6 @@ payload:
   - DOMAIN-SUFFIX,facai103.asefc.cn
   - DOMAIN-SUFFIX,facai103.vqoorz.cn
   - DOMAIN-SUFFIX,facai103.ytzjbf.cn
-  - DOMAIN-SUFFIX,fbia.*.cn
   - DOMAIN-SUFFIX,ffderir64.yk11eakg20pm01.com
   - DOMAIN-SUFFIX,fk.kksp004.top
   - DOMAIN-SUFFIX,fri28.so03281koaq.com
@@ -352,7 +344,6 @@ payload:
   - DOMAIN-SUFFIX,rpdi192.icu
   - DOMAIN-SUFFIX,s2rkge.vmgikpw.com
   - DOMAIN-SUFFIX,sadsaxd.nlkmp.com
-  - DOMAIN-SUFFIX,sat29.so*koaq.com
   - DOMAIN-SUFFIX,sdk2xr232.top
   - DOMAIN-SUFFIX,serty.ktllbb.com
   - DOMAIN-SUFFIX,sfh35.icu
@@ -373,7 +364,6 @@ payload:
   - DOMAIN-SUFFIX,t16-fghgdf.com
   - DOMAIN-SUFFIX,t4uz.td28ese.pro
   - DOMAIN-SUFFIX,tgd54.xyz
-  - DOMAIN-SUFFIX,thu15.*.com
   - DOMAIN-SUFFIX,thyhh1584.com
   - DOMAIN-SUFFIX,tiandiren0031.xyz
   - DOMAIN-SUFFIX,tj4.czpnpjrg.xyz
@@ -424,7 +414,6 @@ payload:
   - DOMAIN-SUFFIX,www.fi11aa198.com
   - DOMAIN-SUFFIX,www.gg86639.vip
   - DOMAIN-SUFFIX,www.hovcu4.top
-  - DOMAIN-SUFFIX,www.ht*.vip
   - DOMAIN-SUFFIX,www.hxkyuwr1040.vip
   - DOMAIN-SUFFIX,www.ikesepsckslp.cn
   - DOMAIN-SUFFIX,www.ivjkkq.xyz
@@ -439,7 +428,6 @@ payload:
   - DOMAIN-SUFFIX,www.lkdgip.xyz
   - DOMAIN-SUFFIX,www.lqsx.net
   - DOMAIN-SUFFIX,www.mnogri.xyz
-  - DOMAIN-SUFFIX,www.mt*.vip
   - DOMAIN-SUFFIX,www.nleljf.xyz
   - DOMAIN-SUFFIX,www.ocfgaa.xyz
   - DOMAIN-SUFFIX,www.ompkcy255.vip
@@ -463,7 +451,6 @@ payload:
   - DOMAIN-SUFFIX,www.xybnim.xyz
   - DOMAIN-SUFFIX,www.yinghua005.sbs
   - DOMAIN-SUFFIX,wyd628.pevdwb.cn
-  - DOMAIN-SUFFIX,xa1jgfbdlwf2ncxq.*.com
   - DOMAIN-SUFFIX,xbax.dt64g8m.pro
   - DOMAIN-SUFFIX,xc105.kpmbl.cn
   - DOMAIN-SUFFIX,xd0411.xdt.usqiryn.cn
@@ -471,7 +458,6 @@ payload:
   - DOMAIN-SUFFIX,xfiwpoj.icu
   - DOMAIN-SUFFIX,xgnsvx.stwqhfi.cn
   - DOMAIN-SUFFIX,xh990214c.llpstudy.top
-  - DOMAIN-SUFFIX,xhffhsl.*.boutique
   - DOMAIN-SUFFIX,xhw13.top
   - DOMAIN-SUFFIX,xiaorongyan.com
   - DOMAIN-SUFFIX,xjlwz.eplwgq.cn

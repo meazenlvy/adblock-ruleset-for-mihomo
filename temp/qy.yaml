@@ -1,11 +1,4 @@
 payload:
-  - DOMAIN-SUFFIX,*
-  - DOMAIN-SUFFIX,*ad.wtzw.com
-  - DOMAIN-SUFFIX,*adintl.cn
-  - DOMAIN-SUFFIX,*googleads*
-  - DOMAIN-SUFFIX,*googleadsserving.cn
-  - DOMAIN-SUFFIX,*pangolin*toutiao*.com
-  - DOMAIN-SUFFIX,*unityads.unity3d.com
   - DOMAIN-SUFFIX,789.kakamobi.cn
   - DOMAIN-SUFFIX,a1.alibabausercontent.com
   - DOMAIN-SUFFIX,a6-remad.qm989.com
@@ -21,9 +14,6 @@ payload:
   - DOMAIN-SUFFIX,access1.tpns.tencent.com
   - DOMAIN-SUFFIX,activity.hdslb.com
   - DOMAIN-SUFFIX,activity.inads.cn
-  - DOMAIN-SUFFIX,ad-*.alibabadns.com
-  - DOMAIN-SUFFIX,ad-*.alimama.com
-  - DOMAIN-SUFFIX,ad-*.kwaidc.com
   - DOMAIN-SUFFIX,ad-api.morefreegame.com
   - DOMAIN-SUFFIX,ad-drs.52qumao.com
   - DOMAIN-SUFFIX,ad-ggtg-api.37.com.cn
@@ -51,10 +41,6 @@ payload:
   - DOMAIN-SUFFIX,adimg.uve.weibo.com
   - DOMAIN-SUFFIX,adkwai.com
   - DOMAIN-SUFFIX,admin-app.edifier.com
-  - DOMAIN-SUFFIX,ads*.papegames.com
-  - DOMAIN-SUFFIX,ads-*.hihonorcloud.com
-  - DOMAIN-SUFFIX,ads-*.vivo.com.cn
-  - DOMAIN-SUFFIX,ads-*.xhscdn.com
   - DOMAIN-SUFFIX,ads-acc.qqbrowser.qq.com
   - DOMAIN-SUFFIX,ads-config.unityads.unity3d.com
   - DOMAIN-SUFFIX,ads-jssdk.vivo.com.cn
@@ -69,9 +55,7 @@ payload:
   - DOMAIN-SUFFIX,ads.x.com
   - DOMAIN-SUFFIX,ads.yieldmo.com
   - DOMAIN-SUFFIX,ads.zijieapi.com
-  - DOMAIN-SUFFIX,ads3-*.zijieapi.com
   - DOMAIN-SUFFIX,ads3-normal-lf.zijieapi.com
-  - DOMAIN-SUFFIX,ads5-*.zijieapi.com
   - DOMAIN-SUFFIX,adsdk.vivo.com.cn
   - DOMAIN-SUFFIX,adsdkapi.dxys.pro
   - DOMAIN-SUFFIX,adse.wsa.ximalaya.com
@@ -111,7 +95,6 @@ payload:
   - DOMAIN-SUFFIX,analytics.woozooo.com
   - DOMAIN-SUFFIX,android.bugly.qq.com
   - DOMAIN-SUFFIX,androiddownload.damai.cn
-  - DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao-*.com
   - DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao.com
   - DOMAIN-SUFFIX,api-access.pangolin-sdk-toutiao1.com
   - DOMAIN-SUFFIX,api-adservices.apple.com
@@ -364,9 +347,6 @@ payload:
   - DOMAIN-SUFFIX,p3-ad-sign.byteimg.com
   - DOMAIN-SUFFIX,p3-ad.adukwai.com
   - DOMAIN-SUFFIX,p3-stone-tv.byteimg.com
-  - DOMAIN-SUFFIX,pagead*.googleadservices-cn.com
-  - DOMAIN-SUFFIX,pagead*.googlesyndication-cn.com
-  - DOMAIN-SUFFIX,pagead*.googlesyndication.com
   - DOMAIN-SUFFIX,pangolin.snssdk.com
   - DOMAIN-SUFFIX,partner.uc.cn
   - DOMAIN-SUFFIX,peplle.cn
