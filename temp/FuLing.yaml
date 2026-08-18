@@ -504,7 +504,6 @@ payload:
   - DOMAIN-SUFFIX,ze516.xyz
   - DOMAIN-SUFFIX,ztstn.020kqy.com
   - DOMAIN-SUFFIX,zz101.ufueng.cn
-  - DOMAIN-WILDCARD,*.*-t0613.vip
   - DOMAIN-WILDCARD,*.01fwzb.com
   - DOMAIN-WILDCARD,*.0lzf11.com
   - DOMAIN-WILDCARD,*.0n6bkk.com
@@ -602,7 +601,6 @@ payload:
   - DOMAIN-WILDCARD,*.lxclli.cn
   - DOMAIN-WILDCARD,*.lzwrhiw.xyz
   - DOMAIN-WILDCARD,*.md410.cc
-  - DOMAIN-WILDCARD,*.mise*.buzz
   - DOMAIN-WILDCARD,*.mkwqj.com
   - DOMAIN-WILDCARD,*.mmdf645.vip
   - DOMAIN-WILDCARD,*.mmdg731.vip
@@ -672,7 +670,6 @@ payload:
   - DOMAIN-WILDCARD,*.xzdabyw.xyz
   - DOMAIN-WILDCARD,*.y80iwf.cyou
   - DOMAIN-WILDCARD,*.ydxdg.xyz
-  - DOMAIN-WILDCARD,*.yinghua-*.cc
   - DOMAIN-WILDCARD,*.yyutfzv.com
   - DOMAIN-WILDCARD,*.yzbpjz.com
   - DOMAIN-WILDCARD,*.yzdx66.com
