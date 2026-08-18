@@ -49,6 +49,11 @@ jobs:
           python scripts/fetch.py
 
 
+      -name: Decompile rules
+        run: |
+          python scripts/decompile.py
+
+
       - name: Parse rules
         run: |
           python scripts/parse.py

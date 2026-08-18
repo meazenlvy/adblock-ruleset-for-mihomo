@@ -3,7 +3,7 @@ import subprocess
 
 
 INPUT_DIR = Path("./sources")
-OUTPUT_DIR = Path("./output")
+OUTPUT_DIR = Path("./temp")
 
 MIHOMO = Path("./bin/mihomo")
 
