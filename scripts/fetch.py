@@ -2,11 +2,14 @@ from pathlib import Path
 from urllib.request import urlopen, Request
 
 SOURCES = {
-    "yq.txt": 
+    "qy.txt": 
         "https://raw.githubusercontent.com/790953214/qy-Ads-Rule/main/black.txt",
 
-    "fuling.txt":
+    "FuLing.txt":
         "https://raw.githubusercontent.com/Kuroba-Sayuki/FuLing-AdRules/main/FuLingRules/FuLingBlockList.txt",
+
+    "SMAdHosts.txt":
+        "https://raw.githubusercontent.com/2Gardon/SM-Ad-FuckU-hosts/refs/heads/master/SMAdHosts"
 }
 
 OUTPUT_DIR = Path("./sources")
