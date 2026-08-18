@@ -16,7 +16,7 @@ def build_mrs():
     command = [
                     str(MIHOMO),
                     "convert-ruleset",
-                    "domain",
+                    "classical",
                     "yaml",
                     str(INPUT),
                     str(OUTPUT),
