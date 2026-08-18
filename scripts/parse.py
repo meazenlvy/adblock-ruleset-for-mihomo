@@ -84,6 +84,7 @@ def parse_adblock_rules(line):
 # Parse regex rules.
     if value.startswith("/") and value.endswith("/"):
         value = value[1: -1]
+        value = f"^{value}$"
         return "DOMAIN-REGEX", value
 
 # Parse domain rules.
