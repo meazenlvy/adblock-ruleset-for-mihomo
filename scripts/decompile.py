@@ -12,8 +12,8 @@ MIHOMO = Path("./bin/mihomo")
 # Define decompile function.
 def decompile_mrs(mrs_file):
 
-    yaml_file = OUTPUT_DIR / (
-        mrs_file.stem + ".yaml"
+    txt_file = OUTPUT_DIR / (
+        mrs_file.stem + ".txt"
     )
 
     subprocess.run(
@@ -23,13 +23,13 @@ def decompile_mrs(mrs_file):
             "domain",
             "mrs",
             str(mrs_file),
-            str(yaml_file),
+            str(txt_file),
         ],
         check=True,
     )
 
     print(
-        f"Converted: {mrs_file} -> {yaml_file}"
+        f"Converted: {mrs_file} -> {txt_file}"
     )
 
 
