@@ -22,7 +22,6 @@ def decompile_mrs(mrs_file):
             "convert-ruleset",
             "domain",
             "mrs",
-            "yaml",
             str(mrs_file),
             str(yaml_file),
         ],
