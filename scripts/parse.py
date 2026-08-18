@@ -1,7 +1,7 @@
 from pathlib import Path
 
-INPUT_DIR = Path("../sources")
-OUTPUT_DIR = Path("../temp")
+INPUT_DIR = Path("./sources")
+OUTPUT_DIR = Path("./temp")
 
 def parser(line):
     unsupported= ("badfilter","denyallow",)

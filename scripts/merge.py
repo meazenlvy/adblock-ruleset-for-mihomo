@@ -2,8 +2,8 @@ from pathlib import Path
 import yaml
 
 
-INPUT_DIR = Path("../temp")
-OUTPUT = Path("../rules/adguard-dns.yaml")
+INPUT_DIR = Path("./temp")
+OUTPUT = Path("./rules/adguard-dns.yaml")
 
 
 def load_rules(path):

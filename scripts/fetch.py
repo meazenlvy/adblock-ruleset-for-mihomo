@@ -9,7 +9,7 @@ SOURCES = {
         "https://raw.githubusercontent.com/Kuroba-Sayuki/FuLing-AdRules/main/FuLingRules/FuLingBlockList.txt",
 }
 
-OUTPUT_DIR = Path("../sources")
+OUTPUT_DIR = Path("./sources")
 
 
 def download(url, path):
