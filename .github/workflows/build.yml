@@ -49,7 +49,7 @@ jobs:
           python scripts/fetch.py
 
 
-      -name: Decompile rules
+      - name: Decompile rules
         run: |
           python scripts/decompile.py
 
