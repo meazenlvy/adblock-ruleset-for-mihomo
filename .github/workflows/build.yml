@@ -74,6 +74,7 @@ jobs:
           "41898282+github-actions[bot]@users.noreply.github.com"
 
 
+          mkdir -p rules
           git add rules/
 
 
