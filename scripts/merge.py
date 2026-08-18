@@ -51,7 +51,9 @@ def main():
             },
             f,
             allow_unicode=True,
-            sort_keys=False
+            sort_keys=False,
+            default_flow_style=False,
+            indent=2
         )
 
 
