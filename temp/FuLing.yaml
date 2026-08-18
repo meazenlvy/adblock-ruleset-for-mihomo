@@ -1,5 +1,5 @@
 payload:
-  - DOMAIN-REGEX,pangolin-sdk.*
+  - DOMAIN-REGEX,^pangolin-sdk.*$
   - DOMAIN-SUFFIX,02539717.com
   - DOMAIN-SUFFIX,08241fb.hpa163.nl
   - DOMAIN-SUFFIX,08de583.p0nkhy03m.top
