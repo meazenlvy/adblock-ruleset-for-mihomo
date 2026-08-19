@@ -3,8 +3,8 @@ import yaml
 
 
 # Define variables.
-INPUT_DIR = Path("./temp")
-OUTPUT = Path("./rules/adblock.yaml")
+INPUT_DIR = Path("./process/parsed")
+OUTPUT = Path("./process/merged/adblock.yaml")
 
 
 # Define load function.

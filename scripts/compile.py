@@ -3,9 +3,9 @@ import subprocess
 import yaml
 
 
-INPUT = Path("./rules/adblock.yaml")
+INPUT = Path("./process/merged/adblock.yaml")
 OUTPUT = Path("./rules/adblock.mrs")
-TEMP = Path("./temp/adblock.yaml")
+TEMP = Path("./process/temp/adblock.yaml")
 
 MIHOMO = Path("./bin/mihomo")
 

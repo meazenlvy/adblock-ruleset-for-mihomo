@@ -15,9 +15,7 @@ SOURCES = {
         "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.mrs"
 }
 
-TXT_OUTPUT_DIR = Path("./sources")
-MRS_OUTPUT_DIR = Path("./sources")
-YAML_OUTPUT_DIR = Path("./temp")
+OUTPUT_DIR = Path("./sources")
 
 
 # Define download function.
@@ -43,10 +41,7 @@ def download_rules(url, path):
 
 def main():
 
-    TXT_OUTPUT_DIR.mkdir(
-        exist_ok=True
-    )
-    YAML_OUTPUT_DIR.mkdir(
+    OUTPUT_DIR.mkdir(
         exist_ok=True
     )
 
@@ -54,27 +49,25 @@ def main():
 
 # Download rules.
     for filename, url in SOURCES.items():
-        if filename.endswith(".txt"):
-            OUTPUT_DIR = TXT_OUTPUT_DIR
-        elif filename.endswith(".yaml"):
-            OUTPUT_DIR = YAML_OUTPUT_DIR
-        elif filename.endswith(".mrs"):
-            OUTPUT_DIR = MRS_OUTPUT_DIR
+        if (
+            filename.endswith(".txt")
+            or filename.endswith(".mrs")):
+            try:
+                download_rules(
+                    url,
+                    OUTPUT_DIR / filename
+                )
+                success += 1
+
+            except Exception as e:
+                print(
+                    f"Failed: {filename}"
+                )
+                print(e)
         else:
             print(f"Unsupported type: {filename}")
             continue
-        try:
-            download_rules(
-                url,
-                OUTPUT_DIR / filename
-            )
-            success += 1
 
-        except Exception as e:
-            print(
-                f"Failed: {filename}"
-            )
-            print(e)
 
     print(
         f"Finished: {success}/{len(SOURCES)}"

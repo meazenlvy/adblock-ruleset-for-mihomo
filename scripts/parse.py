@@ -4,7 +4,7 @@ from pathlib import Path
 
 # Define variables.
 INPUT_DIR = Path("./sources")
-OUTPUT_DIR = Path("./temp")
+OUTPUT_DIR = Path("./process/parsed")
 
 BLOCK_IP = {
     "0.0.0.0",
