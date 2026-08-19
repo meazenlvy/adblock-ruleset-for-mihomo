@@ -3,7 +3,7 @@ from urllib.request import urlopen, Request
 from urllib.error import URLError
 import time
 
-.
+
 # 配置
 SOURCES = {
     "qy.txt": 
