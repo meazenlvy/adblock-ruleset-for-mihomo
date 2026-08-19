@@ -140,6 +140,10 @@ def parse_domain_rules(line):
 
 def main():
 
+    OUTPUT_DIR.mkdir(
+        exist_ok=True
+    )
+
 # Detect types.
     for input_file in INPUT_DIR.glob("*.txt"):
         rules = set()
