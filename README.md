@@ -1,1 +1,8 @@
-an efficient and lightweight adblock ruleset for mihomo , only in mrs.
+# 一个高效、轻量的广告规则集
+---
+## 介绍
+- 只支持Mihomo
+- 只有mrs格式
+---
+## 待办清单
+- []域名树
