@@ -36,6 +36,7 @@ def decompile_mrs(mrs_file):
 def main():
 
     OUTPUT_DIR.mkdir(
+        parents=True,
         exist_ok=True
     )
 
