@@ -18,9 +18,6 @@ command = [
 
 
 # 创建目录
-TEMP.parent.mkdir(
-    exist_ok=True
-)
 OUTPUT.parent.mkdir(
     exist_ok=True
 )
