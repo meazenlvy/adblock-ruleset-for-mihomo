@@ -1,8 +1,8 @@
 name: Build Mihomo Ruleset
 
 on:
+  push:
   workflow_dispatch:
-
   schedule:
     - cron: "0 */6 * * *"
 
