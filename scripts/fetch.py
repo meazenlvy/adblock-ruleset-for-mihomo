@@ -8,9 +8,6 @@ SOURCES = {
     "qy.txt": 
         "https://raw.githubusercontent.com/790953214/qy-Ads-Rule/main/black.txt",
 
-    "FuLing.txt":
-        "https://raw.githubusercontent.com/Kuroba-Sayuki/FuLing-AdRules/main/FuLingRules/FuLingBlockList.txt",
-
     "SMAdHosts.txt":
         "https://raw.githubusercontent.com/2Gardon/SM-Ad-FuckU-hosts/refs/heads/master/SMAdHosts",
 
