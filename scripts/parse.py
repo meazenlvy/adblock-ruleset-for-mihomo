@@ -2,17 +2,15 @@ import ipaddress
 from pathlib import Path
 
 
-# Define variables.
+# 配置
 INPUT_DIR = Path("./sources")
 OUTPUT_DIR = Path("./process/parsed")
-
 BLOCK_IP = {
     "0.0.0.0",
     "127.0.0.1",
     "::",
     "::1"
   }
-
 UNSUPPORTED_MODIFIER= (
     "badfilter",
     "denyallow",
@@ -23,18 +21,15 @@ UNSUPPORTED_MODIFIER= (
     "popup")
 
 
-# Define detect function.
 def detect_type(line):
-
-# Delete comments and blanks.
+    # 删除注释
     value = line.strip()
     if (
         not value
         or value.startswith("#")
         or value.startswith("!")):
         return None
-
-# Detect adblock and domain.
+    # 检测Adblock规则类型
     parts = value.split()
     if len(parts) < 2:
         try:
@@ -53,17 +48,15 @@ def detect_type(line):
         ipaddress.ip_address(parts[0])
     except ValueError:
         return None
-
-# Detect hosts.
+    # 判断Hosts规则类型
     if parts[0] in BLOCK_IP:
         value = parts[1]
         return "HOSTS", value
     return None
 
-# Define parse function for adblock rules.
-def parse_adblock_rules(line):
 
-# Delete whitelists and unsupporte rules.
+def parse_adblock_rules(line):
+    # 删除不支持的规则
     value = line
     if value.startswith("@@"):
         return None
@@ -80,14 +73,12 @@ def parse_adblock_rules(line):
         ):
             return None
     value = value.split("$", 1)[0]
-
-# Parse regex rules.
+    # 处理正则规则
     if value.startswith("/") and value.endswith("/"):
         value = value[1: -1]
         value = f"^{value}$"
         return "DOMAIN-REGEX", value
-
-# Parse domain rules.
+    # 处理域名规则
     if not value:
         return None
     value = value.lower()
@@ -95,8 +86,7 @@ def parse_adblock_rules(line):
         value = value.split("^", 1)[0]
     if "/" in value:
         value = value.split("/", 1)[0]
-
-# Parse other rules.
+    # 处理其他规则
     if value.startswith("||"):
         value = value[2:]
         if "*" in value:
@@ -120,15 +110,13 @@ def parse_adblock_rules(line):
         return None
     return "DOMAIN", value
 
-# Define parse functions for hosts.
-def parse_hosts_rules(line):
 
+def parse_hosts_rules(line):
     value = line.lower()
     return "DOMAIN", value
 
-# Define parse function for domain.
-def parse_domain_rules(line):
 
+def parse_domain_rules(line):
     value = line.lower()
     if value.startswith("+"):
         if value.startswith("+."):
@@ -139,12 +127,11 @@ def parse_domain_rules(line):
     return "DOMAIN", value
 
 def main():
-
+    # 初始化
     OUTPUT_DIR.mkdir(
         exist_ok=True
     )
-
-# Detect types.
+    # 检测规则类型
     for input_file in INPUT_DIR.glob("*.txt"):
         rules = set()
         print(
@@ -158,8 +145,7 @@ def main():
                 if not result:
                     continue
                 rule_type, value = result
-
-# Parse accirding to types.
+                # 根据类型处理规则
                 if rule_type == "ADBLOCK":
                     value = parse_adblock_rules(value)
                 elif rule_type == "HOSTS":
@@ -169,11 +155,11 @@ def main():
                 if not value:
                     continue
                 rules.add(value)
+        # 输出信息
         print(
             f"Found {len(rules)} rules"
         )
-
-# Write.
+        # 输出规则
         output_file = OUTPUT_DIR / (
             input_file.stem + ".yaml"
         )

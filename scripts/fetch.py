@@ -58,7 +58,6 @@ def main():
     )
     success = 0
     start_time = time.time()
-
     # 下载规则
     for filename, url in SOURCES.items():
         if filename.endswith((".txt", ".mrs")):
@@ -72,12 +71,10 @@ def main():
         else:
             print(f"Unsupported type: {filename}")
             continue
-
     # 输出
     print(
         f"Finished: {success}/{len(SOURCES)}"
     )
-
     # 计时
     last_time = time.time() - start_time
     print(f"Total time: {last_time:.2f} seconds.")

@@ -2,20 +2,18 @@ from pathlib import Path
 import subprocess
 
 
-# Define variables.
+# 配置
 INPUT_DIR = Path("./sources")
 OUTPUT_DIR = Path("./process/decompiled")
-
 MIHOMO = Path("./bin/mihomo")
 
 
-# Define decompile function.
 def decompile_mrs(mrs_file):
-
+    # 初始化
     txt_file = OUTPUT_DIR / (
         mrs_file.stem + ".txt"
     )
-
+    # 调用命令反编译
     subprocess.run(
         [
             str(MIHOMO),
@@ -27,20 +25,19 @@ def decompile_mrs(mrs_file):
         ],
         check=True,
     )
-
+    # 输出信息
     print(
         f"Converted: {mrs_file} -> {txt_file}"
     )
 
 
 def main():
-
+    # 初始化
     OUTPUT_DIR.mkdir(
         parents=True,
         exist_ok=True
     )
-
-# Decompile.
+    # 反编译
     for mrs_file in INPUT_DIR.glob("*.mrs"):
         decompile_mrs(mrs_file)
 
