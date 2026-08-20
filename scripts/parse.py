@@ -164,10 +164,9 @@ def main():
             "w",
             encoding="utf-8"
         ) as f:
-            f.write("payload:\n")
             for rule in sorted(rules):
                 f.write(
-                    f"  - {rule}\n"
+                    f"{rule}\n"
                 )
 
 

@@ -18,9 +18,6 @@ def load_rules(path):
         encoding="utf-8"
     ) as file:
         for line in file:
-            if line == "payload:":
-                continue
-            line = line[4:]
             rules.append(line)
     return rules
 
@@ -53,9 +50,8 @@ def main():
         "w",
         encoding="utf-8"
     ) as f:
-        f.write("payload:\n")
         for rule in sorted(rules):
-            f.write(f"  - {rule}\n")
+            f.write(f"{rule}\n")
     # 输出信息
     print(
         f"Total rules: {len(rules)}"
