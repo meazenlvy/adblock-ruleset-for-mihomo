@@ -8,13 +8,10 @@ import time
 SOURCES = {
     "qy.txt": 
         "https://raw.githubusercontent.com/790953214/qy-Ads-Rule/main/black.txt",
-
     "SMAdHosts.txt":
         "https://raw.githubusercontent.com/2Gardon/SM-Ad-FuckU-hosts/refs/heads/master/SMAdHosts",
-
     "awavenue.mrs":
-        "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.mrs"
-
+        "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.mrs",
     "DNS-Kuner.txt":
         "https://raw.githubusercontent.com/Kuner-mw/DNS-Kuner/main/FilterRules/blacklist.txt"
 }
