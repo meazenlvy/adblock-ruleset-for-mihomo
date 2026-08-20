@@ -113,6 +113,8 @@ def parse_adblock_rules(line):
         if  rule.startswith("*."):
             rule = "+" + rule[1:]
             return rule
+        if not rule:
+            return None
         rule = "+." + rule[1:]
         return rule
     return rule
