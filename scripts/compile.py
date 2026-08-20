@@ -1,5 +1,6 @@
 from pathlib import Path
 import subprocess
+import yaml
 
 
 # 配置
@@ -10,7 +11,7 @@ command = [
             str(MIHOMO),
             "convert-ruleset",
             "domain",
-            "txt",
+            "yaml",
             str(INPUT),
             str(OUTPUT),
         ]
