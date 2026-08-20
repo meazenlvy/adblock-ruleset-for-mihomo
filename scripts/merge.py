@@ -18,7 +18,8 @@ def load_rules(path):
         encoding="utf-8"
     ) as file:
         for line in file:
-            if not line
+            if not line:
+                continue
             rules.append(line)
     return rules
 
