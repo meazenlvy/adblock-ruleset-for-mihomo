@@ -20,7 +20,7 @@ def load_rules(path):
         for line in file:
             if line == "payload:":
                 continue
-            line = line[5:]
+            line = line[4:]
             rules.append(line)
     return rules
 
