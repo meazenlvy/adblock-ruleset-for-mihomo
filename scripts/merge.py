@@ -7,32 +7,21 @@ INPUT_DIR = Path("./process/parsed")
 OUTPUT = Path("./process/merged/adblock.yaml")
 
 
+# 创建文件夹
+OUTPUT.parent.mkdir(
+    exist_ok=True
+)
+
 
 def load_rules(path):
     with path.open(
         encoding="utf-8"
-    ) as f:
-        data = yaml.safe_load(f) or {}
+    ) as file:
+        data = yaml.safe_load(file) or {}
     return data.get(
         "payload",
         []
     )
-
-
-def parse(line):
-    if "," not in line:
-        return None
-    rule_type, value = line.split(",", 1)
-    value = value.strip()
-    if rule_type == "DOMAIN":
-        pass
-    elif rule_type == "DOMAIN-SUFFIX":
-        value = "+." + value
-    elif rule_type == "DOMAIN-WILDCARD":
-        value = "+" + value[1:]
-    else:
-        return None
-    return value
 
 
 def main():
@@ -40,28 +29,22 @@ def main():
     domain_rules = set()
     domain_suffix_rules = set()
     rules = set()
-    OUTPUT.parent.mkdir(
-        exist_ok=True
-    )
-    # 加载规则
-    for file in INPUT_DIR.glob("*.yaml"):
+    # 分类规则
+    for path in INPUT_DIR.glob("*.yaml"):
         print(
-            f"Loading: {file}"
+            f"Loading: {path}"
         )
-        for line in load_rules(file):
-            value = parse(line)
-            if value is None:
-                continue
-            elif value.startswith("+"):
-                domain_suffix_rules.add(value)
+        for rule in load_rules(path):
+            if rule.startswith("+."):
+                domain_suffix_rules.add(rule)
             else:
-                domain_rules.add(value)
+                domain_rules.add(rule)
     # 合并去重
-    for a in domain_rules.copy():
-        for b in domain_suffix_rules:
-            suffix = b[2:]
-            if a == suffix or a.endswith("." + suffix):
-                domain_rules.remove(a)
+    for domain_rule in domain_rules.copy():
+        for domain_suffix_rule in domain_suffix_rules:
+            suffix = domain_suffix_rule[2:]
+            if domain_rule == suffix or domain_rule.endswith("." + suffix):
+                domain_rules.remove(domain_rule)
                 break
     rules.update(domain_rules, domain_suffix_rules)
     # 输出规则
