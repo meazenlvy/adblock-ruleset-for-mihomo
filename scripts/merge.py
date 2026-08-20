@@ -18,9 +18,9 @@ def load_rules(path):
         encoding="utf-8"
     ) as file:
         for line in file:
-            line = line.strip()
             if line == "payload:":
                 continue
+            line = line[5:]
             rules.append(line)
     return rules
 
