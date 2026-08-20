@@ -40,13 +40,13 @@ def download_rules(url, path, max_retries, timeout):
             path.write_bytes(content)
             print(f"Saved {path.name} ({len(content)}) bytes in {path}.")
             return True
-        except (URLError, ValueError) as e:
+        except (URLError, ValueError) as error:
             if attempt < max_retries:
                 wait_time = min(2 ** attempt, 30)
                 print(f"Retrying in {wait_time} seconds…")
                 time.sleep(wait_time)
             else:
-                print(f"Failed after {attempt} times: {e}")
+                print(f"Failed after {attempt} times: {error}")
                 return False
 
 

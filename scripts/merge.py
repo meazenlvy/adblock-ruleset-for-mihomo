@@ -1,10 +1,9 @@
 from pathlib import Path
-import yaml
 
 
 # 配置
 INPUT_DIR = Path("./process/parsed")
-OUTPUT = Path("./process/merged/adblock.yaml")
+OUTPUT = Path("./process/merged/adblock.txt")
 
 
 # 创建文件夹
@@ -14,14 +13,16 @@ OUTPUT.parent.mkdir(
 
 
 def load_rules(path):
+    rules = []
     with path.open(
         encoding="utf-8"
     ) as file:
-        data = yaml.safe_load(file) or {}
-    return data.get(
-        "payload",
-        []
-    )
+        for line in file:
+            line = line.strip()
+            if line == "payload:":
+                continue
+            rules.append(line)
+    return rules
 
 
 def main():
@@ -30,7 +31,7 @@ def main():
     domain_suffix_rules = set()
     rules = set()
     # 分类规则
-    for path in INPUT_DIR.glob("*.yaml"):
+    for path in INPUT_DIR.glob("*.txt"):
         print(
             f"Loading: {path}"
         )

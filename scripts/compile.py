@@ -1,17 +1,16 @@
 from pathlib import Path
 import subprocess
-import yaml
 
 
 # 配置
-INPUT = Path("./process/merged/adblock.yaml")
+INPUT = Path("./process/merged/adblock.txt")
 OUTPUT = Path("./rules/adblock.mrs")
 MIHOMO = Path("./bin/mihomo")
 command = [
             str(MIHOMO),
             "convert-ruleset",
             "domain",
-            "yaml",
+            "txt",
             str(INPUT),
             str(OUTPUT),
         ]

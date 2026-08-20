@@ -155,7 +155,7 @@ def main():
         )
         # 输出规则
         output_file = OUTPUT_DIR / (
-            input_file.stem + ".yaml"
+            input_file.stem + ".txt"
         )
         output_file.parent.mkdir(
             exist_ok=True

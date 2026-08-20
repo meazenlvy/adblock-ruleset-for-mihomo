@@ -8,6 +8,13 @@ OUTPUT_DIR = Path("./process/decompiled")
 MIHOMO = Path("./bin/mihomo")
 
 
+# 创建文件夹
+OUTPUT_DIR.mkdir(
+    parents=True,
+    exist_ok=True
+)
+
+
 def decompile_mrs(mrs_file):
     # 初始化
     txt_file = OUTPUT_DIR / (
@@ -32,11 +39,6 @@ def decompile_mrs(mrs_file):
 
 
 def main():
-    # 初始化
-    OUTPUT_DIR.mkdir(
-        parents=True,
-        exist_ok=True
-    )
     # 反编译
     for mrs_file in INPUT_DIR.glob("*.mrs"):
         decompile_mrs(mrs_file)
