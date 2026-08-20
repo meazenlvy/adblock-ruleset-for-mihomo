@@ -99,7 +99,7 @@ def parse_adblock_rules(line):
             if  rule.startswith("*."):
                 rule = "+" + rule[1:]
                 return rule
-        rule = "+." + rule
+        rule = "+." + rule[1:]
         return rule
     if rule.startswith("|"):
         if rule.endswith("|"):
