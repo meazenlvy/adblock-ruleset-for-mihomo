@@ -45,6 +45,7 @@ def detect_type(line):
                 or rule.startswith("|")
                 or rule.startswith("/")
                 or "$" in rule
+                or "*" in rule
                 ):
                 return "ADBLOCK", rule
             return "DOMAIN", rule
@@ -98,7 +99,7 @@ def parse_adblock_rules(line):
             if  rule.startswith("*."):
                 rule = "+" + rule[1:]
                 return rule
-        rule = "+." + rule[1:]
+        rule = "+." + rule
         return rule
     if rule.startswith("|"):
         if rule.endswith("|"):
