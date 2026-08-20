@@ -146,6 +146,8 @@ def main():
                     pass
                 else:
                     continue
+                if rule is None:
+                    continue
                 rules.add(rule)
         # 输出信息
         print(
