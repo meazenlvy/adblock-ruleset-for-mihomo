@@ -10,7 +10,7 @@ command = [
             str(MIHOMO),
             "convert-ruleset",
             "domain",
-            "txt",
+            "text",
             str(INPUT),
             str(OUTPUT),
         ]
