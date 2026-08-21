@@ -18,7 +18,6 @@ def load_rules(path):
         encoding="utf-8"
     ) as file:
         for line in file:
-            line = line.strip()
             rules.append(line)
     return rules
 
@@ -52,7 +51,7 @@ def main():
         encoding="utf-8"
     ) as f:
         for rule in sorted(rules):
-            f.write(f"{rule}\n")
+            f.write(f"{rule}")
     # 输出信息
     print(
         f"Total rules: {len(rules)}"
