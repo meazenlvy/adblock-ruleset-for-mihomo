@@ -4,7 +4,7 @@ import subprocess
 
 # 配置
 INPUT_DIR = Path("./sources")
-OUTPUT_DIR = Path("./process/decompiled")
+OUTPUT_DIR = Path("./process/parsed")
 MIHOMO = Path("./bin/mihomo")
 
 
