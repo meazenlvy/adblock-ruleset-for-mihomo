@@ -22,7 +22,7 @@ class DomainTree:
 
         def __init__(self):
             self.children = {}
-            self.flag = DomainTree.EMPTY
+            self.flag = DomainTree.Node.EMPTY
 
     def __init__(self):
         self.root = self.Node()
