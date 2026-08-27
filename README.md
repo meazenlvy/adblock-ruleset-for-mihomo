@@ -8,9 +8,9 @@
 |---|---|---|
 |adblock.mrs|拦截广告 |[Github](https://raw.githubusercontent.com/meazenlvy/adblock-ruleset-for-mihomo/main/rules/adblock.mrs)|
 ## 待办清单
-- [ ] 域名树
+- [x] 域名树
 - [ ] 增加隐私规则
 - [ ] 增加安全规则
 - [ ] 增加放行规则
 - [ ] 分离配置文件
-- [ ] 进一步去重
+- [x] 进一步去重
