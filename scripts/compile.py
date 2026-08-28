@@ -1,45 +1,44 @@
-from pathlib import Path
+from __future__ import annotations
+import time
 import subprocess
+from pathlib import Path
 
 
-# 配置
 INPUT = Path("./process/merged/adblock.txt")
 OUTPUT = Path("./rules/adblock.mrs")
 MIHOMO = Path("./bin/mihomo")
-command = [
-            str(MIHOMO),
-            "convert-ruleset",
-            "domain",
-            "text",
-            str(INPUT),
-            str(OUTPUT),
-        ]
 
 
-# 创建目录
-OUTPUT.parent.mkdir(
-    exist_ok=True
-)
+def build_mrs() -> bool:
+    OUTPUT.parent.mkdir(
+        exist_ok=True
+    )
+    command = [
+        str(MIHOMO),
+        "convert-ruleset",
+        "domain",
+        "text",
+        str(INPUT),
+        str(OUTPUT),
+    ]
 
-def build_mrs():
-    # 初始化
-    rules = set()
-    # 输出信息
+    # Compile rules
     print(
         f"Building: {INPUT}"
     )
-    # 编译
     result = subprocess.run(
         command,
         capture_output=True,
         text=True
     )
-    # 报错输出信息
+
+    # Capture error
     if result.returncode != 0:
         print("Build failed:")
         print(result.stderr)
         return False
-    # 输出信息
+
+    # Print success info
     print(
         f"Generated: {OUTPUT}"
     )
@@ -47,9 +46,16 @@ def build_mrs():
     return True
 
 
-def main():
-    # 编译
+def main() -> None:
+    # Timer starts.
+    start_time = time.time()
+
+    # Compile
     build_mrs()
+
+    # Timer stops.
+    last_time = time.time() - start_time
+    print(f"Total time: {last_time:.2f} seconds.")
 
 
 if __name__ == "__main__":

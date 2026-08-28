@@ -1,40 +1,30 @@
+from __future__ import annotations
 import ipaddress
+import time
 from pathlib import Path
 
 
-# 配置
 INPUT_DIR = Path("./sources")
 OUTPUT_DIR = Path("./process/parsed")
-BLOCK_IP = {
-    "0.0.0.0",
-    "127.0.0.1",
-    "::",
-    "::1"
-  }
-UNSUPPORTED_MODIFIER= (
-    "badfilter",
-    "denyallow",
-    "script",
-    "image",
-    "css",
-    "third-party",
-    "popup")
-
-# 创建文件夹
-OUTPUT_DIR.mkdir(
-    exist_ok=True
-)
 
 
-def detect_type(line):
-    # 删除注释
+def detect_type(line: str) -> tuple[str, str] | None:
+    BLOCK_IP = {
+        "0.0.0.0",
+        "127.0.0.1",
+        "::",
+        "::1"
+    }
+
+    # Exclude empty rules and comments
     rule = line.strip()
     if (
         not rule
         or rule.startswith("#")
         or rule.startswith("!")):
         return None
-    # 检测Adblock规则类型
+
+    # Detect adblock rules and domain rules
     parts = rule.split()
     if len(parts) < 2:
         try:
@@ -50,25 +40,39 @@ def detect_type(line):
                 return "ADBLOCK", rule
             return "DOMAIN", rule
         return None
+
     try:
         ipaddress.ip_address(parts[0])
     except ValueError:
         return None
-    # 判断Hosts规则类型
+
+    # Detect hosts rules
     if parts[0] in BLOCK_IP:
         rule = parts[1]
         return "HOSTS", rule
+
+    # Other unsopported rules
     return None
 
 
-def parse_adblock_rules(line):
+def parse_adblock(line: str) -> str | None:
+    UNSUPPORTED_MODIFIER= (
+        "badfilter",
+        "denyallow",
+        "script",
+        "image",
+        "css",
+        "third-party",
+        "popup")
     rule = line
-    # 删除放行规则
+
+    # Exclude unsupported rules
     if rule.startswith("@@"):
         return None
-    # 删除不支持的规则
     if "http://" in rule or "https://" in rule:
         return None
+
+    # Parse rules with modifiers
     if "$" in rule:
         modifiers = [
             modifier.split("=", 1)[0]
@@ -82,15 +86,18 @@ def parse_adblock_rules(line):
     rule = rule.split("$", 1)[0]
     if not rule:
         return None
-    # 删除正则规则
+
+    # Exclude regex rules
     if rule.startswith("/") and rule.endswith("/"):
         return None
-    # 处理域名规则
+
+    # Parse suffix rules and domain rules
     rule = rule.lower()
     if "^" in rule:
         rule = rule.split("^", 1)[0]
     if "/" in rule:
         rule = rule.split("/", 1)[0]
+
     if rule.startswith("||"):
         rule = rule[2:]
         if "*" in rule:
@@ -101,12 +108,14 @@ def parse_adblock_rules(line):
                 return rule
             rule = "+." + rule[1:]
         return rule
+
     if rule.startswith("|"):
         if rule.endswith("|"):
             rule = rule[1: -1]
             return rule
         rule = rule[1:]
         return rule
+
     if "*" in rule:
         if "*" in rule[2:]:
             return None
@@ -115,16 +124,20 @@ def parse_adblock_rules(line):
             return rule
         rule = "+." + rule[1:]
         return rule
+
     return rule
 
 
-def parse_hosts_rules(line):
+def parse_hosts(line: str) -> str :
     rule = line.lower()
     return rule
 
 
-def main():
-    # 检测规则类型
+def main() -> None:
+    # Timer starts. 
+    start_time = time.time()
+
+    # Parse rules
     for input_file in INPUT_DIR.glob("*.txt"):
         rules = set()
         print(
@@ -138,26 +151,32 @@ def main():
                 if result is None:
                     continue
                 rule_type, rule = result
-                # 根据类型处理规则
+
+                # Parse rules according to types
                 if rule_type == "ADBLOCK":
-                    rule = parse_adblock_rules(rule)
+                    rule = parse_adblock(rule)
                 elif rule_type == "HOSTS":
-                    rule = parse_hosts_rules(rule)
+                    rule = parse_hosts(rule)
                 elif rule_type == "DOMAIN":
                     pass
                 else:
                     continue
+
+                # Exclude empty rules
                 if rule is None or not rule:
                     continue
                 if rule.startswith("+."):
                     if not rule[2:]:
                         continue
                 rules.add(rule)
-        # 输出信息
+
+        # Save parsed rules
         print(
             f"Found {len(rules)} rules"
         )
-        # 输出规则
+        OUTPUT_DIR.mkdir(
+            exist_ok=True
+        )
         output_file = OUTPUT_DIR / (
             input_file.stem + ".txt"
         )
@@ -172,6 +191,10 @@ def main():
                 f.write(
                     f"{rule}\n"
                 )
+
+    # Timer stops.
+    last_time = time.time() - start_time
+    print(f"Total time: {last_time:.2f} seconds.")
 
 
 if __name__ == "__main__":

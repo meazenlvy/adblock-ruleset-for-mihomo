@@ -1,26 +1,24 @@
-from pathlib import Path
+from __future__ import annotations
 import subprocess
+import time
+from pathlib import Path
 
 
-# 配置
 INPUT_DIR = Path("./sources")
 OUTPUT_DIR = Path("./process/parsed")
 MIHOMO = Path("./bin/mihomo")
 
 
-# 创建文件夹
-OUTPUT_DIR.mkdir(
-    parents=True,
-    exist_ok=True
-)
-
-
-def decompile_mrs(mrs_file):
-    # 初始化
+def decompile(mrs_file: Path) -> None:
+    OUTPUT_DIR.mkdir(
+        parents=True,
+        exist_ok=True
+    )
     txt_file = OUTPUT_DIR / (
         mrs_file.stem + ".txt"
     )
-    # 调用命令反编译
+
+    # Decompile
     subprocess.run(
         [
             str(MIHOMO),
@@ -32,16 +30,22 @@ def decompile_mrs(mrs_file):
         ],
         check=True,
     )
-    # 输出信息
     print(
         f"Converted: {mrs_file} -> {txt_file}"
     )
 
 
-def main():
-    # 反编译
+def main() -> None:
+    # Timer starts.
+    start_time = time.time()
+
+    # Decompile mrs files
     for mrs_file in INPUT_DIR.glob("*.mrs"):
-        decompile_mrs(mrs_file)
+        decompile(mrs_file)
+
+    # Timer stops.
+    last_time = time.time() - start_time
+    print(f"Total time: {last_time:.2f} seconds.")
 
 
 if __name__ == "__main__":
