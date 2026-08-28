@@ -4,11 +4,16 @@ on:
   push:
   workflow_dispatch:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 0 * * *"
 
 
 permissions:
   contents: write
+
+
+concurrency:
+  group: build-ruleset
+  cancel-in-progress: true
 
 
 jobs:
@@ -24,24 +29,23 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v6
         with:
-          python-version: "3.x"
+          python-version: "3.12"
 
 
-      - name: Install dependencies
+      - name: Cache mihomo
+        uses: actions/cache@v4
+        with:
+          path: bin/mihomo
+          key: mihomo-v1.19.30-linux-amd64
+
+      - name: Download mihomo (if not cached)
         run: |
-          pip install pyyaml
-
-
-      - name: Download mihomo
-        run: |
-          mkdir -p bin
-
-          wget -O bin/mihomo.gz \
-          https://github.com/MetaCubeX/mihomo/releases/download/v1.19.30/mihomo-linux-amd64-v1-go123-v1.19.30.gz
-
-          gzip -d bin/mihomo.gz
-
-          chmod +x bin/mihomo
+          if [ ! -f bin/mihomo ]; then
+            mkdir -p bin
+            wget -O bin/mihomo.gz https://github.com/MetaCubeX/mihomo/releases/download/v1.19.30/mihomo-linux-amd64-v1-go123-v1.19.30.gz
+            gzip -d bin/mihomo.gz
+            chmod +x bin/mihomo
+          fi
 
 
       - name: Fetch rules
@@ -74,21 +78,16 @@ jobs:
 
           git config user.name \
           "github-actions[bot]"
-
           git config user.email \
           "41898282+github-actions[bot]@users.noreply.github.com"
 
 
-          mkdir -p rules
-          mkdir -p sources
-          mkdir -p process
           git add rules/
           git add sources/
           git add process/
 
 
-          git diff --cached --quiet || \
-          git commit -m "Update mihomo ruleset"
-
-
-          git push
+          git diff --cached --quiet || {
+            git commit -m "Update mihomo ruleset"
+            git push
+          }
