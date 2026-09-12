@@ -15,6 +15,8 @@ SOURCES = {
         "https://raw.githubusercontent.com/TG-Twilight/AWAvenue-Ads-Rule/main/Filters/AWAvenue-Ads-Rule-Clash.mrs",
     "DNS-Kuner.txt":
         "https://raw.githubusercontent.com/Kuner-mw/DNS-Kuner/main/FilterRules/blacklist.txt"
+    "Hagezi-pro++.txt":
+        "https://raw.githubusercontent.com/hagezi/dns-blocklists/refs/heads/main/adblock/pro.plus.txt"
 }
 OUTPUT_DIR = Path("./sources")
 
