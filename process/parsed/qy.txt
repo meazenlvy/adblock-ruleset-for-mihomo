@@ -241,7 +241,6 @@ httpkafka.unityads.unity3d.com
 https-apple.com
 huaweicdncmnet.inter.iqiyi.com
 huichuan.sm.cn
-i.snssdk.com
 iad.apple.com
 iadfeed.iad.apple.com
 iadmusicmatvideo.music.126.net
@@ -262,7 +261,6 @@ ipv6.shuzilm.cn
 iqiyi-mipdx.cn.miaozhen.com
 ir-sdk.dun.163.com
 iris.iad.apple.com
-is.snssdk.com
 isecure.vivo.com.cn
 isrpt-in.gdt.qq.com
 isrpt-vn.gdt.qq.com
